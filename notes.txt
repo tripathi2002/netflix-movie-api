@@ -351,3 +351,6 @@ ther are three main area in request url -
 
 
 queryStr = {"sort":"duration","duration":{"lt":"117"},"fields":"name,duration,price","page":"0","limit":"2"}
+
+#81 Creating a reusable class 
+the way of calling mathed are random so that's why return this from the method 

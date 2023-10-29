@@ -1,4 +1,5 @@
-const Movie = require('./database');
+const Movie = require('./database.controller');
+const ApiFeatures = require('../utils/apiFeatures')
 
 exports.checkId = (req, res, next, value) => {
     console.log('Movie ID is ' + value);
@@ -6,7 +7,7 @@ exports.checkId = (req, res, next, value) => {
 }
 
 //HIGHEST REATED MIDDLEWARE 
-exports.getHighestRated = (req,res,next)=>{
+exports.getHighestRated = (req, res, next) => {
     req.query.limit = '5';
     req.query.sort = '-ratings';
     next();
@@ -17,6 +18,21 @@ exports.getHighestRated = (req,res,next)=>{
 //GET::HOST:PORT/api/v2/movies?sort=duration,ratings&duration[lt]=117&fields=name,duration,price&page=2&limit=2
 exports.getAllMovies = async (req, res) => {
     try {
+
+        const features = new ApiFeatures(Movie.find(), req.query)
+                .filter()
+                .sort()
+                .limitFields()
+                .paginate();
+
+        let movies = await features.query;
+
+        return res.status(200).json({
+            status: "success",
+            size: movies.length,
+            // page,
+            movies
+        });
         /* // *****************only work mongoose 6.0 or less ****************
         const excludeFields = ['sort','page','limit','fields']; 
         const queryObj = {...req.query};
@@ -28,85 +44,84 @@ exports.getAllMovies = async (req, res) => {
         // console.log(queryObj);
         const movies = await Movie.find(queryObj);
         ******************************************* */
-       
-        // Method: 4th:-########## role1;
-        console.log("\n\nquery object:: ",req.query);
-        let queryStr = JSON.stringify(req.query);
-        console.log("queryStr:",queryStr)
-        queryStr = queryStr.replace(/\b(gte|gt|lte|lt)\b/g, (match) => `$${match}`);
-        console.log("\n after replace QueryStr::",queryStr);
-        const queryObj = JSON.parse(queryStr);  //converting to js object 
-        console.log("\nquery object::",queryObj);
+
+        // // Method: 4th:-########## role1;
+        // let queryStr = JSON.stringify(req.query);
+        // queryStr = queryStr.replace(/\b(gte|gt|lte|lt)\b/g, (match) => `$${match}`);
+        // const queryObj = JSON.parse(queryStr);  //converting to js object 
+        // console.log("\nquery object::",queryObj);
 
         // const movies = await Movie.find(queryObj);
         // find({duration: {$gte:90}, ratings: {$lte:6}});
-        
-    // role2;
-        let query = Movie.find(queryObj);
+
+        // role2;
+
+        // let query = Movie.find(queryObj);
         // SORTING LOGIC
-        if(req.query.sort){
-            // query = query.sort(req.query.sort);
-            // console.log("\nquery sort:: ",req.query.sort)
-            const sortBy = req.query.sort.split(',').join(' ');
-            // console.log(sortBy)
-            
-            query = query.sort(sortBy);
+        // if (req.query.sort) {
+        //     // query = query.sort(req.query.sort);
+        //     // console.log("\nquery sort:: ",req.query.sort)
+        //     const sortBy = req.query.sort.split(',').join(' ');
+        //     // console.log(sortBy)
 
-            // query.sort('releaseYear ratings')
-        }else{
-            query = query.sort('-createdAt');
-        }
-    // role3;
-        // LIMITING FIELDS
-        if(req.query.fields){
-            // query = query.select('name duration price ratings');
-            const fields = req.query.fields.split(',').join(' ');
-            query = query.select(fields);
-        }else{
-            query = query.select('-__v');
-        }
-    //role4;
-        // PAGINATION
-        // query = query.skip(5).limit(5);
+        //     query = query.sort(sortBy);
 
-        const page = req.query.page*1 || 1;
-        const limit = req.query.limit*1 || 5; 
-        // PAGE 1: 1-5; PAGE 2: 6-10; PAGE 3: 11-15;
-        const skip = (page-1)*limit;
-        
-        query = query.skip(skip).limit(limit);
+        //     // query.sort('releaseYear ratings')
+        // } else {
+        //     query = query.sort('-createdAt');
+        // }
+        // role3;
+        // // LIMITING FIELDS
+        // if (req.query.fields) {
+        //     // query = query.select('name duration price ratings');
+        //     const fields = req.query.fields.split(',').join(' ');
+        //     query = query.select(fields);
+        // } else {
+        //     query = query.select('-__v');
+        // }
+        //role4;
+        // // PAGINATION
+        // // query = query.skip(5).limit(5);
 
-        if(req.query.page){
-            const moviesCount = await Movie.countDocuments();
-            if(skip >= moviesCount){
-                throw new Error("This page is not found");
-            }
-        }
+        // const page = req.query.page * 1 || 1;
+        // const limit = req.query.limit * 1 || 5;
+        // // PAGE 1: 1-5; PAGE 2: 6-10; PAGE 3: 11-15;
+        // const skip = (page - 1) * limit;
 
-        const movies = await query;
+        // query = query.skip(skip).limit(limit);
+
+        // if (req.query.page) {
+        //     const moviesCount = await Movie.countDocuments();
+        //     if (skip >= moviesCount) {
+        //         throw new Error("This page is not found");
+        //     }
+        // }
+
+        // const movies = await query;
 
         // Method: 2st:-
         // const movies = await Movie.find({});
-        // const movies = await Movie.find({duration: req.query.duration*1, ratings: +req.query.ratings});
-        
+        // const movies = await Movies.find({duration: req.query.duration*1, ratings: +req.query.ratings});
+
         // Method: 3st:-
         // const movies = await Movie.find()
         //             .where('duration').equals(req.query.duration)
         //             .where('ratings').equals(req.query.ratings);
-        
+
         // const movies = await Movie.find()
         //             .where('duration').gte(req.query.duration)
         //             .where('ratings').lte(req.query.ratings);
         // method 0th:-
         // const movies = await Movie.find();
 
-        res.status(200).json({
-            status: "success",
-            size: movies.length,
-            page,
-            movies
-        });
+        // res.status(200).json({
+        //     status: "success",
+        //     size: movies.length,
+        //     // page,
+        //     movies
+        // });
     } catch (error) {
+        // console.log(error)
         res.status(400).json({
             status: "fail",
             message: error.message

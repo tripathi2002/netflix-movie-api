@@ -1,7 +1,7 @@
 // IMPORT PACKAGE 
 const express = require('express');
 const morgan = require('morgan');         
-const moviesRouter = require('./routes/moviesRoutes');
+const moviesRouter = require('./routes/movies.routes');
 
 let app = express();
 app.use(express.json());

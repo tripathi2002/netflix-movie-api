@@ -2,7 +2,7 @@
 *****************************************
 */
 const express = require('express');
-const moviesController = require('./../controllers/moviescontroller');
+const moviesController = require('./../controllers/movies.controller');
 
 const router = express.Router();
 

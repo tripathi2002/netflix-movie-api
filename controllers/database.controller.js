@@ -1,6 +1,6 @@
 // // connecting to database
 const mongoose = require('mongoose');
-const movieModel = require('./../models/movieModel');
+const movieModel = require('../models/movie.model');
 // const Movie = require('./../models/movieModel');
 
 mongoose.connect("mongodb://127.0.0.1:2000/netflix")
