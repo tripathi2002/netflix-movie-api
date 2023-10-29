@@ -1,7 +1,7 @@
 {
   "name": "nodejs-express-basic",
   "version": "1.0.0",
-  "description": "learning of creation seprate file for routes and creating param middleware",
+  "description": "a complete nodejs course wheere creating a movie api",
   "main": "app.js",
   "scripts": {
     "start": "nodemon server.js"

@@ -346,7 +346,7 @@ The RegExp Object is a regular expression with added Properties and Methods.
 127.0.0.1:1000/api/v2/movies/:id?sort=duration&duration[lt]=117&fields=name,duration,price&page=0&limit=2
 ther are three main area in request url -
 1st - query  ({sort=duration&duration[lt]=117&fields=name,duration,price&page=0&limit=})
-2nd - req.param     (:id)
+2nd - req.params     (:id)
 3rd - req.body      ({})
 
 
@@ -354,3 +354,9 @@ queryStr = {"sort":"duration","duration":{"lt":"117"},"fields":"name,duration,pr
 
 #81 Creating a reusable class 
 the way of calling mathed are random so that's why return this from the method 
+
+#82 Aggreation pipeline: $match & $group 
+ url: GET::127.0.0.1:1000/api/v2/movies/movie-stats
+#83 Aggreation pipeline: $unwind & $project 
+ url: GET::127.0.0.1:1000/api/v2/movies/movie-by-genre/:genre 
+
