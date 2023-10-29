@@ -1,0 +1,353 @@
+#04
+require().
+readline().
+question()
+input: process.stdin,
+output: process.stdout
+on()
+close()         //these are events
+process.exit(0);
+#05***************
+fs = File System
+`` = astic
+`` , `hello: ${name}`,
+readFileSync(filePath, content)
+writeFileSync()
+#06*******
+JavaScript is a single thread programming language
+readFile(filePath, 'utf-8', (err, data)=>{});
+
+BACK GROUND - This is where time consuming task should be executed Asynchronously.
+. Non-blocking IO model
+. This is why we use so many callback function in NODE JS
+. Callback does not mean asynchronous
+#07**********
+'utf-8' : its a incoding
+
+trinagular shape of function(function in function) create callback hell.
+
+#08***********
+require('http').createServer((req, res)=>{res.end();}).listen(port, serverName, ()=>{})
+
+#11*******
+what is routing?
+routing defines the way in which the client request are handled by the application endpoints.
+routing basically means implementing different actions for different URLs.
+these actions can be implemented in different ways, for example, by creating a function.
+...............
+route parameter = www.xyx/book/programming/js, 
+query string = www.xyx/book?author=john&id=101,
+
+#12*********
+let path = request.url;
+path.toLocaleLowerCase()
+#13*****
+response.writeHead(statusCode, {header});
+status code 200 = ok, 404 = page not found
+#14********
+for json data type header will be (application/json),
+for html (text/html)
+for css (text/css)
+json.parse() = convert the json data into javascript object
+#16*************
+map()
+join()
+#17*****
+require('url')
+url.parse(req.url, boolen value) if true = parse query string | if false = not parse query string
+#19****
+module.exports()
+#20***
+server.on('request', (req, res)=>{});
+#21***
+constructor()
+super()
+
+
+new events.EventEmitter() ={
+The EventEmitter class is defined and exposed by the events module:
+All EventEmitters emit the event 'newListener' when new listeners are added and 'removeListener' when existing listeners are removed.
+}
+
+.emit()
+extends
+
+#23**********
+fs.createReadStream('path of file')   = = creat a stream which read the chunck of data one by one 
+res.write()
+res.end() = Call end() method outside of on() method once all the chunks of data is written to the response stream.
+#24************
+pipe() = handel the back presure of read Stream on write stream
+
+#25*********
+npm = NODE PACKAGE MANAGER
+two types = 1(PACKAGE REPOSATORY) 2(COMMAND LINE INTERFACE (CLI))
+npmjs.com = package repository or also called as npm 
+
+> npm -v == version of npm
+> npm init == creating pakage.json file
+
+#26***********
+
+Types of dependencies:
+1-)Regular Dependencies     )2-)Development Dependencies
+
+Regular Dependencies - A package is called as a single or regular dependency if the working of our application or 
+    the code which we are writing, depends on that package.
+        ex. - react.js, express, etc.
+Development Dependencies - A package is called as development dependency, if that package is only require for the
+    development purpose and on which, the working of our application does not depent.
+        ex. - codeformater, auto saver, etc.
+
+> npm install express@4.0.1 (dependency)
+> npm i nodemon --save-dev  (dev dependency)
+(-)hyphone
+for install global use (-g or -global)
+for install dev dependency use (--save-dev)
+
+keep in mind ^- when deploy our code in production we dont deploy node_modules folder
+
+Types of package installs:
+1-)Local Install - The package is only available in that project folder, where the package 
+        is installed. It cannot be used outside of the folder.
+2-)Global Install - The package is installed globally in the machine and can be accessed from 
+        any folder or any project directory.
+
+
+> npx nodemon app.js    (to run the app.js file )
+
+#27********
+NODEJS - (V8 ENGINE) and (LIBUV ENGINE)
+LIBUV - (EVENT LOOP and THHREAD POOL) written in c++ language
+V8 - (MAIN THREAD) writen in js and c++ language
+http parser, C-ARES, OPENSSL, ZLIB
+
+What is Process?
+        A process is a what facilitaes the execution of a program. 
+        In simple words, a process is just a program which is currently executing.
+What is Thread? 
+        A thread is what is responsible for executing a program code in the process. 
+        By default, every process has one main thread.
+
+All top level codes are executed in MAIN THREAD
+   and all other codes that run asynchronasly are executed in the THREAD POOL
+Callback function wait in EVENT LOOP for complete the main thread execution complete
+
+In NODE JS by default we get 4 additional threds in the thread pool 
+these are completely seprate from main thread
+we can configer it upto 1024 threads
+these thread pool are combine as thread
+
+the heavy tasks are executed in thread pool
+
+#28*******
+NODEJS(C++) - (MAIN THREAD) - (EVENT LOOP) - (THREAD -( THREAD POOL)
+Event loop is where all the callback function wait for their execution. 
+Event loop offloads a callback function, which is doing some heavy task like 
+        file reading, to the thread pool. 
+NODEJS uses event driven architecture & is built around callback
+
+the most important phases in event loop are:
+1-) Expired timers
+2-) IO Tasks & Polling 
+3-) setImmidiate callback
+4-) Closed callback
+to more phases are: 
+5-) MICROTASK QUEUE
+6-) NEXTTICK QUEUE
+MICROTASK QUEUE and NEXTTICK QUEUE  are independent queues 
+
+^- what not to do to avoid blocking of main thread:
+        . Don't use sync version of functions in fs, crypto and zlib modules inside the callback function.
+        . Do not perform very complex calculation inside th callback function which can block the main thread.
+        . Be careful with JSON which has a large number of JSON objects.
+        . Don't use too complex regular expressions inside the callback functions.
+        
+
+#30 ******
+What is Express JS?
+    Express JS is a free and open-source web application framework for NODE JS.
+Express is completely build on NODE JS. 
+It is one of the most popular framework for nodeJS. 
+Express contains very robust and useful set of features. 
+Express allows to write NODEJS application faster & simpler. 
+With express we can organize node js code in MVC architecture. 
+
+app.get() method
+res.status(200).send();
+res.status(200).json({});
+#31******
+API - Application Programming Interface
+An API is a piece of software that can be used by another piece of software in order to allow application to talk to each other.
+APIs are not always used for sending data. The "Application" in API can actually mean many different things.
+The fs and http module in NODE JS are also APIs
+Browser DOM APIs like fetch and getElementById
+A class in a Programming language containing methods & properties. 
+
+#32*****
+REST - REpresentational State Transfer
+REST is an architectural style for providing standards between computer system on the web, 
+    making it easier for system to communicate with each other. 
+
+1-) Separate APIs into logical resources - 
+        Resource: A resourse is an object or repersentation of something which has data associated to it.
+            Any information that can be named can be a resource.
+            like: movies, users, reviews
+2-) Expose structure, resource based URL
+3-) Use HTTP method 
+        operations on request - 
+            CRUD - Create Read Update Delete
+        http methods : GET, POST, PUT, PATCH, Delete
+4-) Send JSON  data in response 
+        JSON: API
+        OData JSON Protocol
+5-) API must be stateless -
+        Stateless RESTful API: All state is handled on the client. This means that each request must contain all the 
+                information necessary to process a certain request.
+        The server should not have to remember previous request.
+
+#33**********
+JSON.parse()
+JSON.stringify()
+jsend JSON formatting - 
+            res.status(200).json({
+                    status: "sucess",
+                    data: {
+                        movies: movies
+                    }
+                });
+---------
+count = movies.len;
+app.use(express.json()); -// middle wire for adding body to req.body
+const newMovie = Object.assign({id: newId}, req.body)     - merge object
+status code 201 for success fully write
+#36*************
+Route parameters are named URL segments that are used to capture the values specified at their position in the URL. 
+27.0.0.1:300/api/v1/movies/:id? = 27.0.0.1:300/api/v1/movies/20
+:id = variable || ? show id as optional parameters 
+req.params sotore all the parameters 
+id = +req.params.id - for converting string to numeric
+addition or multiplication sign add with string to convet it in numeric form
+
+for making a route perameter optional use end of parameter an (?)question mark ex: 'api/:id/:name?'
+find(() => {})
+we fetch values as array.find((el) => {return el.id === id;}) or array.find(el => el.id === id)
+
+#37********
+PUT and PATCH 
+- Put is a method of modifying resource where the client sends data that updates the entire resource. 
+- PATCH is a method of modifying resources where the client sends partial data that is to be update without modifying the entier data. 
+route parameter(:)
+Object.assign(a, b) - assign the value of b object to a or merge them 
+splice(index, numberOfElement)
+
+#39*****
+Middleware - Middleware is a function which execute between req and res in the order they will be defined. 
+        client - request -> request received -> middleware executed -> response sent -> response - client
+In express every thing is a middleware. 
+routes are middleware
+Middleware function always recive three arguments
+next(); - for go to the next middleware function.
+req.requestedAt = new Date().toISOString();
+for using middleware app.use() property is use.
+
+----------------
+npm i morgan
+-----------------
+express.json() - its a function which returns a fuction
+morgan have five parameters
+morgan parameters - combined, dev, tiny, short, common
+
+#43*************
+to start server.js script enter commmand 
+>npm start  // it automatically start the server.js file
+
+#44**********
+param middleware run for a specific perameter
+    router.param('id', (req, res, next, value)=>{});
+
+#45*** Chaining multiple middleware
+#46**  Static file
+app.use(express.static(directoryName))   - Give the Access to static file
+
+not clear :-: middleware return promises
+
+#47 *** 
+env are available every where in the project , we not need to require it.
+env = environment variable 
+
+DOTENV EXTENSION 
+
+> npm install dotenv 
+> npm install mongoose 
+ // req.requestedAt = new Date().toISOString();
+    req.requestedAt = new Date().toDateString();
+
+
+#65 & 66*****
+
+node .\controllers\database.js
+#70
+{new: true} // return the updated document 
+#73***
+console.log(process.argv);
+process.exit();
+
+node .\data\import-dev-data.js --import
+
+query string = ?duration=20&rating=4.5  // from the url
+req.query = store the value in key pairs 
+
+#75****** 
+Shallow copy :- 
+A shallow copy of an object is a copy whose properties share the same references (point to the same underlying values) 
+as those of the source object from which the copy was made.
+
+Deep Copy :- 
+    In Deep copy, It creates copy of each object inside of the class. 
+
+... =spread operator .
+excludeFields = [],
+delete object[key];
+
+one way of creating shallow copy:-
+object = {...req.query} = this will extract each property of query object and create new individual property of each query object. 
+
+========>>>>>>>>>>>>>>>>
+const excludeFields = ['sort','page','limit','fields'];
+
+const queryObj = {...req.query};
+
+excludeFields.forEach(el=>{
+    delete queryObj[el];
+});
+=========<<<<<<<<<<<<<<<<<<
+#76 ***
+127.0.0.1:1000/api/v2/movies/?duration[gte]=110&ratings[lte]=5
+
+how to using replace (with all select all matches using \b)
+
+queryStr.replace(/\b(gte|gt|lte|lt)\b/g, (match) => `$${match}`);
+(- minus symbole is use for desending order);
+
+mongoose sort is a query method 
+and js sort is a array method
+
+it is posible to exclude the field from schema - (select: false)
+
+countDocuments() = Creates a countDocuments query: counts the number of documents that match filter.
+
+await key convert the query into string 
+
+The RegExp Object = A regular expression is a pattern of characters.
+The pattern is used for searching and replacing characters in strings.
+The RegExp Object is a regular expression with added Properties and Methods.
+
+127.0.0.1:1000/api/v2/movies/:id?sort=duration&duration[lt]=117&fields=name,duration,price&page=0&limit=2
+ther are three main area in request url -
+1st - query  ({sort=duration&duration[lt]=117&fields=name,duration,price&page=0&limit=})
+2nd - req.param     (:id)
+3rd - req.body      ({})
+
+
+queryStr = {"sort":"duration","duration":{"lt":"117"},"fields":"name,duration,price","page":"0","limit":"2"}

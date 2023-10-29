@@ -1,0 +1,8 @@
+[
+    {"_id":1,"name":"its a game","releaseYear":2040,"duration":100},
+    {"_id":4,"name":"india","releaseYear":2000,"duration":100},
+    {"_id":6,"name":"space world","releaseYear":2000,"duration":170},
+    {"_id":7,"name":"space","releaseYear":2000,"duration":170},
+    {"_id":8,"name":"adventure 2","releaseYear":2020,"duration":120},
+    {"_id":9,"name":"adventure 2","releaseYear":2020}
+]
