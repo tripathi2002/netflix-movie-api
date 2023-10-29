@@ -1,6 +1,7 @@
 // // connecting to database
 const mongoose = require('mongoose');
-const movieModel = require('../models/movie.model');
+// const movieModel = require('../models/movie.model');
+const MovieSchema = require('../models/movie.model');
 // const Movie = require('./../models/movieModel');
 
 mongoose.connect("mongodb://127.0.0.1:2000/netflix")
@@ -11,7 +12,7 @@ mongoose.connect("mongodb://127.0.0.1:2000/netflix")
         console.log("some error hass occured");
     });
 
-const movie = mongoose.model('Movie', movieModel.schema);
+const movie = mongoose.model('Movie', MovieSchema);
 
 module.exports = movie
 

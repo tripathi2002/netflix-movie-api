@@ -1,8 +1,157 @@
 [
-    {"_id":1,"name":"its a game","releaseYear":2040,"duration":100},
-    {"_id":4,"name":"india","releaseYear":2000,"duration":100},
-    {"_id":6,"name":"space world","releaseYear":2000,"duration":170},
-    {"_id":7,"name":"space","releaseYear":2000,"duration":170},
-    {"_id":8,"name":"adventure 2","releaseYear":2020,"duration":120},
-    {"_id":9,"name":"adventure 2","releaseYear":2020}
+    {
+        "name":"Riddick",
+        "description":"Left for dead on a sun-scorched planet, Riddick finds himself up against an alien race of predators.",
+        "duration": 110,
+        "ratings": 5,
+        "totalRating": 250,
+        "releaseYear": 2011,
+        "releaseDate":"2023-03-13T04:37:59.130+00:00",
+        "genres": [
+            "Action",
+            "Sci-Fi",
+            "Thriller"
+        ],
+        "directors":["Rudra Tripathi"],
+        "coverImage":"Riddick-2014.jpg",
+        "actors": [
+            "Suraj",
+            "Abhishek",
+            "Katee Sackhoff"
+        ],
+        "price": 10
+    },
+    {
+        "name":"Kya Baat",
+        "description":"Left for dead on a sun-scorched planet, Riddick finds himself up against an alien race of predators.",
+        "duration": 110,
+        "ratings": 4,
+        "totalRating": 250,
+        "releaseYear": 2013,
+        "releaseDate":"2023-03-13T04:37:59.130+00:00",
+        "genres": [
+            "Action",
+            "Sci-Fi",
+            "Thriller"
+        ],
+        "directors":["Rudra Tripathi"],
+        "coverImage":"Riddick-2014.jpg",
+        "actors": [
+            "Suraj",
+            "Abhishek",
+            "Katee Sackhoff"
+        ],
+        "price": 20
+    },
+    {
+        "name":"apple",
+        "description":"Left for dead on a sun-scorched planet, Riddick finds himself up against an alien race of predators.",
+        "duration": 180,
+        "ratings": 6,
+        "totalRating": 250,
+        "releaseYear": 2012,
+        "releaseDate":"2023-03-13T04:37:59.130+00:00",
+        "genres": [
+            "Action",
+            "Sci-Fi",
+            "Thriller"
+        ],
+        "directors":["Rudra Tripathi"],
+        "coverImage":"Riddick-2014.jpg",
+        "actors": [
+            "Suraj",
+            "Abhishek",
+            "Katee Sackhoff"
+        ],
+        "price": 30
+    },
+    {
+        "name":"big bang",
+        "description":"Left for dead on a sun-scorched planet, Riddick finds himself up against an alien race of predators.",
+        "duration": 100,
+        "ratings": 10,
+        "totalRating": 250,
+        "releaseYear": 2010,
+        "releaseDate":"2023-03-13T04:37:59.130+00:00",
+        "genres": [
+            "Action",
+            "Sci-Fi",
+            "Thriller"
+        ],
+        "directors":["Rudra Tripathi"],
+        "coverImage":"Riddick-2014.jpg",
+        "actors": [
+            "Suraj",
+            "Abhishek",
+            "Katee Sackhoff"
+        ],
+        "price": 40
+    },
+    {
+        "name":"pandey ji",
+        "description":"Left for dead on a sun-scorched planet, Riddick finds himself up against an alien race of predators.",
+        "duration": 130,
+        "ratings": 2,
+        "totalRating": 250,
+        "releaseYear": 2014,
+        "releaseDate":"2023-03-13T04:37:59.130+00:00",
+        "genres": [
+            "Action",
+            "Sci-Fi",
+            "Thriller"
+        ],
+        "directors":["Rudra Tripathi"],
+        "coverImage":"Riddick-2014.jpg",
+        "actors": [
+            "Suraj",
+            "Abhishek",
+            "Katee Sackhoff"
+        ],
+        "price": 30
+    },
+    {
+        "name":"world",
+        "description":"Left for dead on a sun-scorched planet, Riddick finds himself up against an alien race of predators.",
+        "duration": 115,
+        "ratings": 7,
+        "totalRating": 250,
+        "releaseYear": 2016,
+        "releaseDate":"2023-03-13T04:37:59.130+00:00",
+        "genres": [
+            "Action",
+            "Sci-Fi",
+            "Thriller"
+        ],
+        "directors":["Rudra Tripathi"],
+        "coverImage":"Riddick-2014.jpg",
+        "actors": [
+            "Suraj",
+            "Abhishek",
+            "Katee Sackhoff"
+        ],
+        "price": 50
+    },
+    {
+        "name":"duniya",
+        "description":"Left for dead on a sun-scorched planet, Riddick finds himself up against an alien race of predators.",
+        "duration": 110,
+        "ratings": 5,
+        "totalRating": 250,
+        "releaseYear": 2013,
+        "releaseDate":"2023-03-13T04:37:59.130+00:00",
+        "genres": [
+            "Action",
+            "Sci-Fi",
+            "Thriller"
+        ],
+        "directors":["Rudra Tripathi"],
+        "coverImage":"Riddick-2014.jpg",
+        "actors": [
+            "Suraj",
+            "Abhishek",
+            "Katee Sackhoff"
+        ],
+        "price": 100
+    }
+    
 ]

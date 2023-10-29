@@ -19,7 +19,6 @@ class ApiFeatures {
 
         // SORTING LOGIC
     sort(){
-        console.log(this.queryStr)
         if (this.queryStr.sort) {
             let sortBy = this.queryStr.sort.split(',').join(' ');
             this.query = this.query.sort(sortBy);
@@ -51,7 +50,7 @@ class ApiFeatures {
         // query = query.skip(5).limit(5);
 
         const page = this.queryStr.page * 1 || 1;
-        const limit = this.queryStr.limit * 1 || 5;
+        const limit = this.queryStr.limit * 1 || 10;
         // PAGE 1: 1-5; PAGE 2: 6-10; PAGE 3: 11-15;
         const skip = (page - 1) * limit;
 

@@ -1,2 +1,4 @@
 /node_modules 
 /public/bin
+/data/movies2.json
+/log

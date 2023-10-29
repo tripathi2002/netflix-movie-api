@@ -152,7 +152,8 @@ exports.createMovie = async (req, res) => {
         // const movie = await Movie.insertMany({_id:3,"name":"hindustan","releaseYear":2002,"duration":100});
         // console.log(req.body);         
 
-        const movie = await Movie.insertMany(req.body);
+        // const movie = await Movie.insertMany(req.body);
+        const movie = await Movie.create(req.body);
 
         res.status(200).json({
             status: "success",

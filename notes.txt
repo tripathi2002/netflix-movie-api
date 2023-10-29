@@ -360,3 +360,12 @@ the way of calling mathed are random so that's why return this from the method
 #83 Aggreation pipeline: $unwind & $project 
  url: GET::127.0.0.1:1000/api/v2/movies/movie-by-genre/:genre 
 
+#84 Virtual Properties --
+regular function syntax:- 
+function(){ //comments } 
+
+arrow function have not their this key word 
+
+#85 Document Middleware (mongoose middleware)
+#86 Query Middleware (mongoose middleware) 
+#87 Aggreation Middleware ()

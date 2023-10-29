@@ -1,8 +1,7 @@
 const mongoose = require('mongoose');
+const fs = require('fs');
 
-
-// const moviesSchema = new mongoose.Schema({
-exports.schema = new mongoose.Schema({
+const movieSchema = new mongoose.Schema({
     // _id: { 
     //     type: Number,
     //     required: true
@@ -61,12 +60,67 @@ exports.schema = new mongoose.Schema({
     price: {
         type: Number,
         required: [true, 'Price is required field!']
+    },
+    createdBy: {
+        type: String,
     }
-})
+}, {
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true }
+});
 
-// module.exports = moviesSchema;
+movieSchema.virtual('durationInHours').get(function() {
+    return this.duration / 60;
+});
 
-// const movie = mongoose.model('Movie', moviesSchema);
+// EXECUTED BEFORE THE DOCUMENT IS SAVED IN DB 
+// .save() or .create() 
+// insertMany findByIdAndUpdate will not work
+movieSchema.pre('save', function(next) {
+    this.createdBy = 'Vibhu Tripathi'
+    // console.log(this);
+    next();
+});
 
-// module.exports = {moviesSchema, movie};
-// module.exports = movie;
+movieSchema.post('save', function(doc, next) {
+    const content = `a new movie document with name ${doc.name} has been created by ${doc.createdBy}.\n`;
+    fs.writeFileSync('./log/log.txt', content, { flag: 'a' }, (err) => {
+        console.log(err.message);
+    })
+    next();
+});
+
+// movieSchema.pre('find', function(next) {
+//     this.find({ releaseDate: { $lte: Date.now() } });
+//     next();
+// });
+
+// movieSchema.pre('findOne', function(next) {
+//     this.find({ releaseDate: { $lte: Date.now() } });
+//     next();
+// });
+
+// regular expresion mathod
+movieSchema.pre(/^find/, function(next) {
+    this.find({ releaseDate: { $lte: Date.now() } });
+    this.startTime = Date.now();
+    next();
+});
+
+movieSchema.post(/^find/, function(doc, next) {
+    this.find({ releaseDate: { $lte: Date.now() } });
+    this.endTime = Date.now();
+
+    const content = `Query took ${this.endTime - this.startTime} milliseconds to fetch the documents.\n`;
+    fs.writeFileSync('./log/log.txt', content, {flag: 'a'}, (err)=>{
+        console.log(err.message);
+    });
+    next();
+});
+
+movieSchema.pre('aggregate', function(next){
+    this.pipeline().unshift({$match: { releaseDate: {$lte: new Date()}}});
+    next();
+});
+
+module.exports = movieSchema;
