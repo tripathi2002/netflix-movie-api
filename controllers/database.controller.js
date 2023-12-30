@@ -4,13 +4,13 @@ const mongoose = require('mongoose');
 const MovieSchema = require('../models/movie.model');
 // const Movie = require('./../models/movieModel');
 
-mongoose.connect("mongodb://127.0.0.1:2000/netflix")
-    .then((conn) => {
-        console.log("connected to database...");
-    }
-    ).catch(err => {
-        console.log("some error hass occured");
-    });
+// mongoose.connect("mongodb://127.0.0.1:2000/netflix")
+//     .then((conn) => {
+//         console.log("DB Connection Successful");
+//     }
+//     ).catch(err => {
+//         console.log("Some error has occured");
+//     });
 
 const movie = mongoose.model('Movie', MovieSchema);
 

@@ -434,4 +434,14 @@ SET NODE_ENV=development & nodemon server.js
 
 err.name will only work if you are using the original err object returned from mongoose. 
 
-when creating shallow copy you will copy only enumerable attributes.
+when creating shallow copy you will copy only enumerable attributes. 
+
+#98 Handling Mongoose Validation Errors 
+#99 Handling Rejected Promises Globally
+process.exit() :: 0 for success, 1 for exception 
+#100 Handling Uncaught Exceptions 
+uncaughtException are synchronouse code exception
+console.log(x); // x is uncaughtException 
+
+if any error occured in express handled by the global error handler middleware 
+#101 Debugging NodeJs Code
