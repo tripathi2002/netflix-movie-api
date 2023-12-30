@@ -2,7 +2,7 @@ const dotenv = require('dotenv');
 dotenv.config({path:'./config.env'}); 
 
 const app = require('./app');       // use this after config
-
+// ["🚗", "🚙", "🚕"]❤️ ♡ 
 // CREATE A SERVER 
 // USING PORT from ENVIRONMENT VARIABLE 
 // const port = process.env.PORT || 1000;

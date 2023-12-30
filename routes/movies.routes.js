@@ -3,6 +3,7 @@
 */
 const express = require('express');
 const moviesController = require('./../controllers/movies.controller');
+const asyncErrorHandler = require('../utils/asyncErrorHandler');
 
 const router = express.Router();
 
@@ -14,6 +15,7 @@ router.route('/movie-stats').get(moviesController.getMovieStats)
 router.route('/movie-by-genre/:genre').get(moviesController.getMovieByGenre);
 
 router.route('/')
+                // .get(asyncErrorHandler( moviesController.getAllMovies))  // it's work same 
                 .get(moviesController.getAllMovies)
                 .post(moviesController.createMovie)
 

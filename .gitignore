@@ -2,3 +2,5 @@
 /public/bin
 /data/movies2.json
 /log
+/.vscode
+/config.env

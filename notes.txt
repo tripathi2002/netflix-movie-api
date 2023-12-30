@@ -1,3 +1,17 @@
+# config.env  file>>>
+NODE_ENV=production #development&production
+#NODE_ENV=development
+USER=admin
+PASSWORD=2626 
+PORT=1000 
+CONN_STR=mongodb://127.0.0.1:2000/netflix
+
+-------------------------------
+
+runing programs methods >>>
+$ SET NODE_ENV=development& nodemon server.js
+-----------
+
 #04
 require().
 readline().
@@ -368,4 +382,56 @@ arrow function have not their this key word
 
 #85 Document Middleware (mongoose middleware)
 #86 Query Middleware (mongoose middleware) 
-#87 Aggreation Middleware ()
+#87 Aggreation Middleware () 
+#88 Data Validation : Built-in validators 
+Data validation is important because it protect from entering malesius data in the database 
+
+required is a data validator but  unique is not a data validator 
+
+{ new: true, runValidators: true } 
+
+#89 Data validation : Custom Validators 
+In custom validator function if use this key word its not working when updationg the document because this keyword is not pointing when updationg
+validator library 
+
+npm i validator 
+
+#90 default route handeler 
+${req.url},  ${req.baseUrl},  ${req.host},  ${req.originalUrl}
+
+#91 Global Error handling middleware 
+
+const err = new Error(`Can't find ${req.url} on the server`);
+    err.status = 'fail';
+    err.statusCode = 404;
+    next(err);  // if next(100) or any other value express will asume it an err and skip all the middleware and pass it to global error handler
+
+#92 creating a custom Error Class 
+if status code starts with 500 to 599 its an error 
+and if its start with 400 to 499 its not an error 
+400-499 :: known as client error 
+500-599 :: known as server error 
+
+stack trace :: track the point where error has occured 
+402: payment required 
+
+#93 Error Handling in async function 
+
+async function returns promise 
+500 Internal Server Error 
+400 Bad Request 
+#94 Handling Not Found Errors 
+#95 Devlopment and production Environmennt error 
+#96 Handling Invalid ID Error 
+
+destructuring the error object
+let e = {...error};  
+
+// cmd command ::
+SET NODE_ENV=development & nodemon server.js 
+
+#97 Handling Duplicate Field Error 
+
+err.name will only work if you are using the original err object returned from mongoose. 
+
+when creating shallow copy you will copy only enumerable attributes.

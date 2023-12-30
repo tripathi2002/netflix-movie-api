@@ -1,5 +1,7 @@
 const Movie = require('./database.controller');
-const ApiFeatures = require('../utils/apiFeatures')
+const ApiFeatures = require('../utils/apiFeatures');
+const CustomError = require('../utils/custom.error');
+const asyncErrorHandler = require('../utils/asyncErrorHandler');
 
 exports.checkId = (req, res, next, value) => {
     console.log('Movie ID is ' + value);
@@ -16,9 +18,8 @@ exports.getHighestRated = (req, res, next) => {
 // ROUTE HANDLER FUNCTIONS
 //GET ALL MOVIES 
 //GET::HOST:PORT/api/v2/movies?sort=duration,ratings&duration[lt]=117&fields=name,duration,price&page=2&limit=2
-exports.getAllMovies = async (req, res) => {
+exports.getAllMovies = async (req, res, next) => {
     try {
-
         const features = new ApiFeatures(Movie.find(), req.query)
             .filter()
             .sort()
@@ -122,89 +123,108 @@ exports.getAllMovies = async (req, res) => {
         // });
     } catch (error) {
         // console.log(error)
-        res.status(400).json({
-            status: "fail",
-            message: error.message
-        });
+        // res.status(400).json({
+        //     status: "fail",
+        //     message: error.message
+        // });
+        next(error);
     }
 }
 
-exports.getMovie = async (req, res) => {
+exports.getMovie = asyncErrorHandler(async (req, res, next) => {
 
-    try {
+    // try {
         // const movie = await Movie.findOne({_id: req.params.id});
         const movie = await Movie.findById({ _id: req.params.id });
 
+        if(!movie){
+            const error = new CustomError(`Movie with ID is not found!`, 404);
+            return next(error);
+        }
         res.status(200).json({
             status: "success",
             movie
         });
-    } catch (error) {
-        res.status(400).json({
-            status: "fail",
-            message: error
-        });
-    }
-}
+    // } catch (error) {
+        // const err = new CustomeError(, 400);
+    //     res.status(400).json({
+    //         status: "fail",
+    //         message: error
+    //     });
+    // }
+});
 
-exports.createMovie = async (req, res) => {
-    try {
-        // const movie = await Movie.insertMany({_id:3,"name":"hindustan","releaseYear":2002,"duration":100});
-        // console.log(req.body);         
+exports.createMovie = asyncErrorHandler(async (req, res) => {
+    // try {
+    // const movie = await Movie.insertMany({_id:3,"name":"hindustan","releaseYear":2002,"duration":100});
+    // console.log(req.body);         
 
-        // const movie = await Movie.insertMany(req.body);
-        const movie = await Movie.create(req.body);
+    // const movie = await Movie.insertMany(req.body);
+    const movie = await Movie.create(req.body);
 
-        res.status(200).json({
-            status: "success",
-            movie
-        });
-    } catch (error) {
-        res.status(400).json({
-            status: "fail",
-            message: error
-        });
-    }
-}
+    res.status(200).json({
+        status: "success",
+        movie
+    });
+    // } catch (error) {
+    //     // const  err = new CustomError(error.message, 400);
+    //     // res.status(400).json({
+    //     //     status: "fail",
+    //     //     message: error
+    //     // });
+    //     next(error)
+    // }
+});
 
-exports.updateMovie = async (req, res) => {
-    try {
+exports.updateMovie = asyncErrorHandler(async (req, res) => {
+    // try {
         const updatedMovie = await Movie.findByIdAndUpdate({ _id: req.params.id }, req.body, { new: true, runValidators: true })
         // runValidators check the schema validation 
         // new return updated movie
+
+        if(!updatedMovie){
+            const error = new CustomError('Movie with ID is not found!', 404);
+            return next(error);
+        }
+
         res.status(200).json({
             status: "success",
             data: {
                 movie: updatedMovie
             }
         })
-    } catch (error) {
-        res.send(404).json({
-            status: "fail",
-            message: error.message
-        });
-    }
-}
+    // } catch (error) {
+        // res.status(404).json({
+        //     status: "fail",
+        //     message: error.message
+        // });
+    // }
+});
 
-exports.deleteMovie = async (req, res) => {
-    try {
-        await Movie.findByIdAndDelete(req.params.id);
+exports.deleteMovie = asyncErrorHandler(async (req, res) => {
+    // try {
+        const deletedMovie = await Movie.findByIdAndDelete(req.params.id);
+        
+        if (!deletedMovie) {
+            const error = new CustomError('Movie with ID is not found!', 404);
+            return next(error);
+        }
 
         res.status(204).json({
             status: "success",
             data: null
         });
 
-    } catch (error) {
-        res.send(404).json({
-            status: "fail",
-            message: error.message
-        });
-    }
-}
+    // } catch (error) {
+        // res.send(404).json({
+        //     status: "fail",
+        //     message: error.message
+        // });
+    // }
+});
 
-exports.getMovieStats = async (req, res) => {
-    try {
+exports.getMovieStats = asyncErrorHandler(async (req, res) => {
+    // try {
         const stats = await Movie.aggregate([
             { $match: { ratings: { $gte: 4.5 } } },
             {
@@ -231,16 +251,16 @@ exports.getMovieStats = async (req, res) => {
             }
         })
 
-    } catch (error) {
-        res.status(404).json({
-            status: "fail",
-            message: error.message
-        });
-    }
-}
+    // } catch (error) {
+        // res.status(404).json({
+        //     status: "fail",
+        //     message: error.message
+        // });
+    // }
+});
 
-exports.getMovieByGenre = async (req, res) => {
-    try {
+exports.getMovieByGenre = asyncErrorHandler(async (req, res) => {
+    // try {
         const genre = req.params.genre;
         const movies = await Movie.aggregate([
             { $unwind: '$genres' },
@@ -267,10 +287,10 @@ exports.getMovieByGenre = async (req, res) => {
             }
         });
 
-    } catch (error) {
-        res.status(404).json({
-            status: "fail",
-            message: error.message
-        });
-    }
-}
+    // } catch (error) {
+        // res.status(404).json({
+        //     status: "fail",
+        //     message: error.message
+        // });
+    // }
+});

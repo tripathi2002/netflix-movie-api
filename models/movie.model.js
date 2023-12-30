@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const fs = require('fs');
+const validator = require('validator');
 
 const movieSchema = new mongoose.Schema({
     // _id: { 
@@ -8,9 +9,12 @@ const movieSchema = new mongoose.Schema({
     // },
     name: {
         type: String,
-        required: true,
+        required: [true, "Name is required field!"],
         unique: true,
-        trim: true
+        minlength: [4, "Movie name must not have less than 4 characters"],
+        maxlength: [100, "Movie name must not have more than 100 characters"],
+        trim: true,
+        validator: [validator.isAlpha, "name should contain only alphabets"]
     },
     description: {
         type: String,
@@ -19,11 +23,16 @@ const movieSchema = new mongoose.Schema({
     },
     duration: {
         type: Number,
-        required: [true, 'Duration is required field!']
+        required: [true, "Duration is required field!"]
     },
     ratings: {
         type: Number,
-        // default: 1.0
+        validate: {
+            validator: function(value) {
+                return value >= 1 && value <= 10;
+            },
+            message: 'rating ({VALUE}) should be below 10 and above 0'
+        }
     },
     totalRating: {
         type: Number,
@@ -43,7 +52,11 @@ const movieSchema = new mongoose.Schema({
     },
     genres: {
         type: [String],
-        required: [true, 'Genres is required field!']
+        required: [true, 'Genres is required field!'],
+        enum: {
+            values: ['Action', 'Adventure', 'Sci-Fi', 'Thriller', 'Crime', 'Drama', 'Romance', 'Biography'],
+            message: 'This genre does not exist'
+        }
     },
     directors: {
         type: [String],
@@ -112,14 +125,14 @@ movieSchema.post(/^find/, function(doc, next) {
     this.endTime = Date.now();
 
     const content = `Query took ${this.endTime - this.startTime} milliseconds to fetch the documents.\n`;
-    fs.writeFileSync('./log/log.txt', content, {flag: 'a'}, (err)=>{
+    fs.writeFileSync('./log/log.txt', content, { flag: 'a' }, (err) => {
         console.log(err.message);
     });
     next();
 });
 
-movieSchema.pre('aggregate', function(next){
-    this.pipeline().unshift({$match: { releaseDate: {$lte: new Date()}}});
+movieSchema.pre('aggregate', function(next) {
+    this.pipeline().unshift({ $match: { releaseDate: { $lte: new Date() } } });
     next();
 });
 
