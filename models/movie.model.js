@@ -136,4 +136,7 @@ movieSchema.pre('aggregate', function(next) {
     next();
 });
 
-module.exports = movieSchema;
+const movie = mongoose.model('Movie', movieSchema);
+
+module.exports = movie;
+// module.exports = movieSchema;

@@ -4,6 +4,7 @@
 const express = require('express');
 const moviesController = require('./../controllers/movies.controller');
 const asyncErrorHandler = require('../utils/asyncErrorHandler');
+const { protect } = require('./../controllers/auth.controller');
 
 const router = express.Router();
 
@@ -16,12 +17,12 @@ router.route('/movie-by-genre/:genre').get(moviesController.getMovieByGenre);
 
 router.route('/')
                 // .get(asyncErrorHandler( moviesController.getAllMovies))  // it's work same 
-                .get(moviesController.getAllMovies)
-                .post(moviesController.createMovie)
+                .get(protect, moviesController.getAllMovies)
+                .post(protect, moviesController.createMovie)
 
 router.route('/:id')
                 .get(moviesController.getMovie)
-                .patch(moviesController.updateMovie)
-                .delete(moviesController.deleteMovie)
+                .patch(protect, moviesController.updateMovie)
+                .delete(protect, moviesController.deleteMovie)
 
 module.exports = router;

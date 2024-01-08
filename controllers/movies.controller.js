@@ -1,4 +1,4 @@
-const Movie = require('./database.controller');
+const Movie = require('../models/movie.model');
 const ApiFeatures = require('../utils/apiFeatures');
 const CustomError = require('../utils/custom.error');
 const asyncErrorHandler = require('../utils/asyncErrorHandler');
@@ -18,8 +18,8 @@ exports.getHighestRated = (req, res, next) => {
 // ROUTE HANDLER FUNCTIONS
 //GET ALL MOVIES 
 //GET::HOST:PORT/api/v2/movies?sort=duration,ratings&duration[lt]=117&fields=name,duration,price&page=2&limit=2
-exports.getAllMovies = async (req, res, next) => {
-    try {
+exports.getAllMovies = asyncErrorHandler(async (req, res) => {
+    // try {
         const features = new ApiFeatures(Movie.find(), req.query)
             .filter()
             .sort()
@@ -121,15 +121,15 @@ exports.getAllMovies = async (req, res, next) => {
         //     // page,
         //     movies
         // });
-    } catch (error) {
+    // } catch (error) {
         // console.log(error)
         // res.status(400).json({
         //     status: "fail",
         //     message: error.message
         // });
-        next(error);
-    }
-}
+    //     next(error);
+    // }
+});
 
 exports.getMovie = asyncErrorHandler(async (req, res, next) => {
 

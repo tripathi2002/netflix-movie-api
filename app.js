@@ -2,6 +2,7 @@
 const express = require('express');
 const morgan = require('morgan');
 const moviesRouter = require('./routes/movies.routes');
+const authRouter = require('./routes/auth.router');
 const CustomError = require('./utils/custom.error');
 const globalErrorHandler = require('./controllers/error.controller')
 
@@ -21,6 +22,7 @@ app.use((req, res, next) => {
 
 // USING ROUTES
 app.use('/api/v2/movies', moviesRouter);    // calling moviesRouter middleware
+app.use('/api/v2/users', authRouter);
 
 app.all('*', (req, res, next) => {
     // res.status(404).json({

@@ -445,3 +445,20 @@ console.log(x); // x is uncaughtException
 
 if any error occured in express handled by the global error handler middleware 
 #101 Debugging NodeJs Code
+#102 Creating a User Model 
+#103 Creating a new User 
+#104 Encrypting Password 
+validater only work for save() & create() 
+#105 How Authentication Works with JWT 
+#106 Signing up a User 
+#107 Logging in a User 
+#108 Protecting Routes: Part 1 
+>> util library :: The util module supports the needs of Node.js internal APIs. 
+        Many of the utilities are useful for application and module developers as well. To access it:
+        const util = require('util');
+
+>> util.promisify() :: Takes a function following the common error-first callback style, i.e. taking an (err, value) => ... callback as the last argument, 
+        and returns a version that returns promises. 
+
+>> git rm --cached -f config.env // remove the 'config.env' file from tracking 
+# 109 Protecting Routes: Part 2 
