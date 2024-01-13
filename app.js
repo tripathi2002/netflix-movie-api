@@ -9,7 +9,7 @@ const globalErrorHandler = require('./controllers/error.controller')
 let app = express();
 app.use(express.json());
 
-// if(process.env.NODE_ENV === 'devlopment'){
+// if(process.env.NODE_ENV === 'development'){
 // }
 app.use(morgan('dev'));                 //calling morgan function
 
@@ -34,7 +34,7 @@ app.all('*', (req, res, next) => {
     // err.statusCode = 404;
 
     const err = new CustomError(`Can't find ${req.url} on the server`, 404);
-    next(err);  // if next(100) or any other value express will asume it an err and pass it to global error handler
+    next(err);  // if next(100) or any other value express will assume it an err and pass it to global error handler
 });
 
 app.use(globalErrorHandler);

@@ -4,7 +4,7 @@
 const express = require('express');
 const moviesController = require('./../controllers/movies.controller');
 const asyncErrorHandler = require('../utils/asyncErrorHandler');
-const { protect } = require('./../controllers/auth.controller');
+const { protect, restrict } = require('./../controllers/auth.controller');
 
 const router = express.Router();
 
@@ -23,6 +23,6 @@ router.route('/')
 router.route('/:id')
                 .get(moviesController.getMovie)
                 .patch(protect, moviesController.updateMovie)
-                .delete(protect, moviesController.deleteMovie)
+                .delete(protect, restrict('admin'), moviesController.deleteMovie)
 
 module.exports = router;
