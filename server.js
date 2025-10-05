@@ -1,5 +1,5 @@
 const dotenv = require('dotenv');
-dotenv.config({path:'./config.env'}); 
+dotenv.config({path:'./.env'}); 
 const mongoose = require('mongoose');
 
 process.on('uncaughtException', (err) => {
@@ -13,7 +13,7 @@ const app = require('./app');       // use this after config
 // CREATE A SERVER 
 // USING PORT from ENVIRONMENT VARIABLE 
 const port = process.env.PORT || 1000;
-const conn_str = process.env.CONN_STR || "mongodb://127.0.0.1:2000/netflix";
+const conn_str = process.env.CONN_STR || process.env.DB_URI || "mongodb://127.0.0.1:2000/netflix";
 
 // console.log(process.env.CONN_STR);
 // Connecting to DB
@@ -21,7 +21,6 @@ mongoose.connect(conn_str)
     .then((conn) => {
         console.log(`DB Connection Successful: ${conn_str}`);
     });
-
 
 // let port = dotenv.PORT;
 const server = app.listen(port, ()=>{

@@ -7,6 +7,10 @@ PORT=1000
 CONN_STR=mongodb://127.0.0.1:2000/netflix
 
 -------------------------------
+# for running in docker --
+docker compose up --build -d 
+docker compose logs -f app_name
+-------------------------------
 
 runing programs methods >>>
 $ SET NODE_ENV=development& nodemon server.js

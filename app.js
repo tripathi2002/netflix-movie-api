@@ -20,6 +20,10 @@ app.use((req, res, next) => {
     next();
 });
 
+app.get('/', async (req, res) => {
+    return res.status(200).json({status: 200, message: "server up and running..."})
+})
+
 // USING ROUTES
 app.use('/api/v2/movies', moviesRouter);    // calling moviesRouter middleware
 app.use('/api/v2/users', authRouter);
