@@ -76,6 +76,11 @@ const movieSchema = new mongoose.Schema({
     },
     createdBy: {
         type: String,
+    },
+    status: {
+        type: Boolean,
+        default: true,
+        select: false,
     }
 }, {
     toJSON: { virtuals: true },
@@ -117,6 +122,7 @@ movieSchema.post('save', function(doc, next) {
 movieSchema.pre(/^find/, function(next) {
     this.find({ releaseDate: { $lte: Date.now() } });
     this.startTime = Date.now();
+    this.where({ status: true });
     next();
 });
 
