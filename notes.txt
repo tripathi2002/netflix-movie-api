@@ -20,6 +20,9 @@ docker ps
 
 # for import movies 
 docker exec -it netflix-movie-api node ./data/import-dev-data.js --import
+
+# for run cmd in docker container  
+docker exec -it netflix-movie-api npm install node_modules_name
 -------------------------------
 
 runing programs methods >>>
