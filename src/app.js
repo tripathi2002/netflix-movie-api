@@ -3,6 +3,8 @@ const express = require("express");
 const morgan = require("morgan");
 const rateLimit = require("express-rate-limit");
 const helmet = require("helmet");
+const sanitize = require('express-mongo-sanitize');
+const xssSanitize = require('express-xss-sanitizer');
 
 const moviesRouter = require("./routes/movies.routes");
 const authRouter = require("./routes/auth.router");
@@ -25,6 +27,9 @@ app.use("/api", limiter);
 app.use(express.json({
     limit: '50kb'
 }));
+
+app.use(sanitize())
+app.use(xssSanitize.xss())
 
 app.use(morgan("dev")); //calling morgan function
 
