@@ -4,8 +4,8 @@
   "description": "a complete nodejs course wheere creating a movie api",
   "main": "app.js",
   "scripts": {
-    "start": "SET NODE_ENV=development & nodemon server.js",
-    "start_prod": "SET NODE_ENV=production & nodemon server.js"
+    "start": "node server.js",
+    "start:docker:dev": "nodemon server.js"
   },
   "author": "Vibhu Tripathi",
   "license": "ISC",

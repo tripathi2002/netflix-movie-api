@@ -10,6 +10,13 @@ CONN_STR=mongodb://127.0.0.1:2000/netflix
 # for running in docker --
 docker compose up --build -d 
 docker compose logs -f app_name
+
+# for development mode 
+docker compose -f docker-compose.dev.yml up --build  -d
+docker compose -f docker-compose.dev.yml logs -f app
+
+# for view containers 
+docker ps
 -------------------------------
 
 runing programs methods >>>

@@ -17,7 +17,7 @@ app.use(express.static('./public'));       //creating route for static folder fo
 app.use((req, res, next) => {
     // req.requestedAt = new Date().toISOString();
     req.requestedAt = new Date().toDateString();
-    next();
+    next(); 
 });
 
 app.get('/', async (req, res) => {

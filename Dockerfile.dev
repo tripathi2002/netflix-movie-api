@@ -7,6 +7,12 @@ COPY package*.json ./
 
 RUN npm install
 
+# Install nodemon globally for live reload
+RUN npm install -g nodemon
+
+# Copy all files
 COPY . .
 
-CMD ["node", "server.js"]
+EXPOSE 3000
+
+CMD ["npm", "run", "dev"]
