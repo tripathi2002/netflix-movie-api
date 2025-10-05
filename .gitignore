@@ -1,8 +1,11 @@
 /node_modules 
 /public/bin
 /data/movies2.json
-/log
 /.vscode
-/config.env
-.env
+/log
 /volumes/mongodb/
+
+.env
+.env.*
+/config.env
+!.env.example
