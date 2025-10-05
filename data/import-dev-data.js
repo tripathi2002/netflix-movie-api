@@ -6,13 +6,13 @@ const dotenv = require('dotenv');
 const fs = require('fs');
 
 // const Movie = require('./../models/movieModel');
-const model = require('./../models/movieModel');
+const model = require('./../src/models/movie.model');
 
 dotenv.config({path: './config.env'});
 
 // CONNECT TO MONGODB 
 // mongoose.connect("mongodb://127.0.0.1:2000/netflix", {
-mongoose.connect(process.env.CONN_STR, {
+mongoose.connect(process.env.DB_URI, {
     useNewUrlParser: true
 }).then(conn=>{
     console.log('DB Connection Successful');
@@ -24,7 +24,7 @@ mongoose.connect(process.env.CONN_STR, {
 const Movie = mongoose.model('Movie', model.schema);
 
 // READ MOVIES.JSON FILE 
-const movies = JSON.parse(fs.readFileSync('./data/movies1.json', 'utf-8')); // from root directory (which is current directory)
+const movies = JSON.parse(fs.readFileSync('./data/movies.json', 'utf-8')); // from root directory (which is current directory)
 
 // DELETE EXISTING MOVIE DOCUMENTS FROM COLLECTION
 const deleteMovies = async ()=>{

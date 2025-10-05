@@ -19,7 +19,7 @@ services:
       - "3001:3000"
     restart: always
     env_file:
-      - .env.development
+      - /src/environments/.env.development
     environment:
       APP_NAME: Netflix_Movie_API
       # NODE_ENV: development
@@ -28,10 +28,10 @@ services:
     depends_on:
       - mongo_db
     volumes:
-      - logs:/log
       - .:/netflix_movie_api          # mount local source code
       - /netflix_movie_api/node_modules  # keep container’s node_modules separate
-      - /netflix_movie_api/volumes/mongodb  # this hides your local ./volumes folder inside container
+      - /netflix_movie_api/volumes  # this hides your local ./volumes folder inside container
+      - logs:/netflix_movie_api/logs
     command: npm run start:docker:dev
 
 volumes:
@@ -47,4 +47,4 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: ./volumes/logs/
+      device: ./volumes/logs

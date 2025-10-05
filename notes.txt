@@ -17,6 +17,9 @@ docker compose -f docker-compose.dev.yml logs -f app
 
 # for view containers 
 docker ps
+
+# for import movies 
+docker exec -it netflix-movie-api node ./data/import-dev-data.js --import
 -------------------------------
 
 runing programs methods >>>

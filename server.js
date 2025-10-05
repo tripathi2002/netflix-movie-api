@@ -1,5 +1,5 @@
 const dotenv = require('dotenv');
-dotenv.config({path:'./.env'}); 
+dotenv.config({path:'./src/.env'}); 
 const mongoose = require('mongoose');
 
 process.on('uncaughtException', (err) => {
@@ -8,7 +8,7 @@ process.on('uncaughtException', (err) => {
     process.exit(1);
 });
 
-const app = require('./app');       // use this after config
+const app = require('./src/app');       // use this after config
 // ["🚗", "🚙", "🚕"]❤️ ♡ 
 // CREATE A SERVER 
 // USING PORT from ENVIRONMENT VARIABLE 
