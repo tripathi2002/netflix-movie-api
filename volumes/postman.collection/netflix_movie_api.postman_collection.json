@@ -1,0 +1,58 @@
+{
+	"info": {
+		"_postman_id": "e07440ae-166e-466e-b0ff-4dba3b3d9cff",
+		"name": "netflix_movie_api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29501420"
+	},
+	"item": [
+		{
+			"name": "movie_api",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}{{PORT}}",
+					"host": [
+						"{{BASE_URL}}{{PORT}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "BASE_URL",
+			"value": ""
+		},
+		{
+			"key": "PORT",
+			"value": ""
+		}
+	]
+}
