@@ -14,11 +14,16 @@ router.route('/highest-rated').get(moviesController.getHighestRated,moviesContro
 
 router.route('/movie-stats').get(moviesController.getMovieStats)
 router.route('/movie-by-genre/:genre').get(moviesController.getMovieByGenre);
+router.route('/movie-by-category/:category_id')
+                .get(moviesController.getMoviesByCategoryId, moviesController.getAllMovies)
+router.route('/movie-by-similarity/:movie_id')
+                .get(moviesController.getSimilarMovies)
 
 router.route('/')
                 // .get(asyncErrorHandler( moviesController.getAllMovies))  // it's work same 
                 .get(protect, moviesController.getAllMovies)
                 .post(protect, moviesController.createMovie)
+
 
 router.route('/:id')
                 .get(moviesController.getMovie)

@@ -9,6 +9,9 @@ const hpp = require("hpp");
 
 const moviesRouter = require("./routes/movies.routes");
 const authRouter = require("./routes/auth.router");
+const homeRouter = require("./routes/home.router");
+const categoriesRouter = require("./routes/category.router");
+
 const CustomError = require("./utils/custom.error");
 const globalErrorHandler = require("./controllers/error.controller");
 
@@ -63,6 +66,8 @@ app.use((req, res, next) => {
 
 // USING ROUTES
 app.use("/api/v2/movies", moviesRouter); // calling moviesRouter middleware
+app.use("/api/v2/home", homeRouter); // calling moviesRouter middleware
+app.use("/api/v2/categories", categoriesRouter); // calling moviesRouter middleware
 app.use("/api/v2/users", authRouter);
 
 app.all("*", (req, res, next) => {

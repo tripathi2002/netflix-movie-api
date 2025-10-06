@@ -1,0 +1,43 @@
+A subtitle file stores the textual content of subtitles along with timing information that tells the video player when to show and hide each piece of text during playback.
+
+Common Subtitle File Structure (Example: SRT format)
+An SRT (SubRip Subtitle) file is a plain text file with this structure:
+
+text
+1
+00:00:01,000 --> 00:00:04,000
+Hello, welcome to the movie.
+
+2
+00:00:05,000 --> 00:00:08,000
+This is an example subtitle.
+
+3
+00:00:10,000 --> 00:00:13,000
+Enjoy watching!
+Each block has a sequence number.
+
+Then a timestamp range (start time --> end time) in hours:minutes:seconds,milliseconds format.
+
+Followed by the subtitle text showing on the screen during that time.
+
+Blocks are separated by blank lines.
+
+How It Works in Video Playback
+The video player loads the subtitle file alongside the video.
+
+When the playback time reaches the start time in a subtitle block, the text is displayed on screen.
+
+The text disappears when the playback time reaches the end time.
+
+This synchronization allows viewers to read subtitles in time with the audio.
+
+Other Subtitle Formats
+WebVTT (.vtt): Similar to SRT but supports styling, positioning, and metadata; used often in web video players.
+
+SubStation Alpha (.ssa, .ass): Advanced format with extensive styling and positioning capabilities.
+
+MicroDVD (.sub) and others exist with different conventions and features.
+
+Summary
+Subtitle files store the textual content and timing info needed to display captions synchronized with video playback. Your streaming app will serve these files along with the video, and the client player will render subtitles on screen based on timing cues.

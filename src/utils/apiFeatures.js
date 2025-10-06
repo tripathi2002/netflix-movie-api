@@ -7,6 +7,7 @@ class ApiFeatures {
     // filtering loginc
     filter(){
         // Method: 4th:-########## role1;
+        // console.log("this.queryStr ---> ", this.queryStr )
         let queryString = JSON.stringify(this.queryStr);
         queryString = queryString.replace(/\b(gte|gt|lte|lt)\b/g, (match) => `$${match}`);
         
@@ -19,8 +20,7 @@ class ApiFeatures {
 
         // SORTING LOGIC
     sort(){
-        console.log(this.queryStr)
-        console.log(this.queryStr.duration)
+        // console.log(this.queryStr)
         if (this.queryStr.sort) {
             let sortBy = this.queryStr.sort.split(',').join(' ');
             this.query = this.query.sort(sortBy);
